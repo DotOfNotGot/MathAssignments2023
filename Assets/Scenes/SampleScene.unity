@@ -874,6 +874,7 @@ GameObject:
   - component: {fileID: 1598028328}
   - component: {fileID: 1598028327}
   - component: {fileID: 1598028331}
+  - component: {fileID: 1598028332}
   m_Layer: 0
   m_Name: PhysicsCube
   m_TagString: Untagged
@@ -972,9 +973,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _dir: {x: 0.01, y: 0, z: 1}
-  _tempGizmoDebugNormal: {x: 0, y: 0, z: 0}
-  _tempGizmoDebugCenter: {x: 0, y: 0, z: 0}
+  _dir: {x: 0.52, y: 0, z: 1}
+--- !u!114 &1598028332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598028326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5030888a8ff8b4289c989dc8e77b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comparisonTransform: {fileID: 1660798478}
 --- !u!1 &1660798474
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,7 +1001,7 @@ GameObject:
   - component: {fileID: 1660798475}
   - component: {fileID: 1660798479}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: MovingCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1082,7 +1094,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1660798474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11ad0cdb18b34154482a559e9645f824, type: 3}
+  m_Script: {fileID: 11500000, guid: 20550bb9287fc88489892a7ac720a403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: 5, z: 0}

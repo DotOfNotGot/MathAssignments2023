@@ -12,11 +12,7 @@ public class PhysicsBody : MonoBehaviour
     [SerializeField] private float _speed = 10.0f;
     [SerializeField] private Vector3 _dir = Vector3.forward;
 
-    [SerializeField]private Vector3 _tempGizmoDebugNormal = Vector3.zero;
-    [SerializeField]private Vector3 _tempGizmoDebugCenter = Vector3.zero;
-    
-    public Vector3 Velocity => _speed * _dir;
-
+    public Vector3 Velocity => _speed * _dir * Time.deltaTime;
 
     // Start is called before the first frame update
     void Awake()
@@ -28,7 +24,7 @@ public class PhysicsBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += _dir * (_speed * Time.deltaTime);
+        transform.position += Velocity;
     }
 
     private void HandleCollision(AABBCollider other)
@@ -51,6 +47,7 @@ public class PhysicsBody : MonoBehaviour
         {
             maxDistance = distances.z;
         }
+        Vector3 prevPosition = transform.position + -Velocity;
 
         if (maxDistance < 0)
         {
@@ -61,13 +58,10 @@ public class PhysicsBody : MonoBehaviour
             return;
         }
 
-        Vector3 prevPosition = transform.position + -_dir * (_speed * Time.deltaTime);
 
         Bounds prevPosBounds = new Bounds(prevPosition, _collider.MeshBounds.size);
 
-        _dir = Vector3.Reflect(_dir, GetCollisionNormal(prevPosBounds, other.MeshBounds, Velocity * Time.deltaTime));
-        
-        // _speed = 0;
+        _dir = (Vector3.Reflect(_dir, GetCollisionNormal(prevPosBounds, other.MeshBounds, Velocity)) * Mathf.PerlinNoise(transform.position.x, transform.position.z)).normalized;
     }
 
     private Vector3 GetCollisionNormal(Bounds a, Bounds b, Vector3 velocity)
@@ -88,11 +82,7 @@ public class PhysicsBody : MonoBehaviour
         float t6 = (b.max.z - a.center.z) * dirFrac.z;
 
         float tMin = Mathf.Max(Mathf.Max(Mathf.Min(t1, t2), Mathf.Min(t3, t4), Mathf.Min(t5, t6)));
-        // float tMax = Mathf.Min(Mathf.Min(Mathf.Max(t1, t2), Mathf.Max(t3, t4), Mathf.Max(t5, t6)));
 
-        float t;
-
-        // t = tMin;
         if (tMin == t1) return Vector3.left;
         if (tMin == t2) return Vector3.right;
         if (tMin == t3) return Vector3.down;
@@ -107,8 +97,6 @@ public class PhysicsBody : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawLine(transform.position, transform.position + (_dir * _speed));
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(_tempGizmoDebugCenter, _tempGizmoDebugNormal * 10.0f);
     }
 
     private void OnDestroy()
