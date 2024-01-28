@@ -663,8 +663,8 @@ Transform:
   m_GameObject: {fileID: 533394665}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.96, y: 0, z: 7.0949}
-  m_LocalScale: {x: 1, y: 1, z: 17.88872}
+  m_LocalPosition: {x: 2.96, y: -0.000006, z: 7.0949}
+  m_LocalScale: {x: 1, y: 1.000006, z: 17.88872}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -748,6 +748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collisionObjects: []
+  _physicsBodies: []
 --- !u!4 &999984004
 Transform:
   m_ObjectHideFlags: 0
@@ -874,7 +875,7 @@ GameObject:
   - component: {fileID: 1598028327}
   - component: {fileID: 1598028331}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: PhysicsCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -971,7 +972,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _dir: {x: 1, y: 0, z: 0}
+  _dir: {x: 0.01, y: 0, z: 1}
+  _tempGizmoDebugNormal: {x: 0, y: 0, z: 0}
+  _tempGizmoDebugCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &1660798474
 GameObject:
   m_ObjectHideFlags: 0

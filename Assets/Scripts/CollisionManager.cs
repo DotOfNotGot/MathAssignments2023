@@ -5,12 +5,16 @@ using UnityEngine;
 public class CollisionManager : MonoBehaviour
 {
     [SerializeField] private List<AABBCollider> _collisionObjects;
+    [SerializeField] private List<PhysicsBody> _physicsBodies;
 
     // Start is called before the first frame update
     void Awake()
     {
         _collisionObjects = new List<AABBCollider>();
+        _physicsBodies = new List<PhysicsBody>();
+        
         _collisionObjects.AddRange(FindObjectsOfType<AABBCollider>());
+        _physicsBodies.AddRange(FindObjectsOfType<PhysicsBody>());
     }
 
     // Update is called once per frame

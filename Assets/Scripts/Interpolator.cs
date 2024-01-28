@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine;
 public class Interpolator : MonoBehaviour
 {
 
+    enum State
+    {
+        Additive,
+        Subtractive
+    }
+    
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private Vector3 endPosition;
 
@@ -13,6 +20,8 @@ public class Interpolator : MonoBehaviour
     private float _t = 0.0f;
 
     private bool _isAdditive = true;
+
+    private State _state = State.Additive;
     
     // Start is called before the first frame update
     void Start()
@@ -24,27 +33,29 @@ public class Interpolator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isAdditive)
+        if (_state == State.Additive)
         {
             _t += Time.deltaTime * speed;
+            transform.position = Vector3.Lerp(startPosition, endPosition, EaseOutBounce(_t));
         }
         else
         {
             _t -= Time.deltaTime * speed;
+            transform.position = Vector3.Lerp(startPosition, endPosition, EaseInElastic(_t));
         }
 
         if (_t > 1.0f)
         {
             _t = 1.0f;
-            _isAdditive = false;
+            _state = State.Subtractive;
         }
         else if (_t < 0.0f)
         {
             _t = 0.0f;
-            _isAdditive = true;
+            _state = State.Additive;
         }
 
-        transform.position = Vector3.Lerp(startPosition, endPosition, EaseOutBounce(_t));
+        
     }
 
     private float EaseOutBounce(float t)
@@ -69,6 +80,15 @@ public class Interpolator : MonoBehaviour
             return n1 * (t -= 2.625f / d1) * t + 0.984375f;
         }
     }
+
+    private float EaseInElastic(float t)
+    {
+        const float c4 = (float)((2 * Math.PI) / 3);
+
+        return t == 0 ? 0 : t == 1 ? 1 : -Mathf.Pow(2, 10 * t - 10) * Mathf.Sin((t * 10 - 10.75f) * c4);
+
+    }
+    
 }
 
 
