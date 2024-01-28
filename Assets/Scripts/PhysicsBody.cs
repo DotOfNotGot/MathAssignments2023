@@ -61,7 +61,7 @@ public class PhysicsBody : MonoBehaviour
 
         Bounds prevPosBounds = new Bounds(prevPosition, _collider.MeshBounds.size);
 
-        _dir = (Vector3.Reflect(_dir, GetCollisionNormal(prevPosBounds, other.MeshBounds, Velocity)) * Mathf.PerlinNoise(transform.position.x, transform.position.z)).normalized;
+        _dir = (Vector3.Reflect(_dir, GetCollisionNormal(prevPosBounds, other.MeshBounds, Velocity)));
     }
 
     private Vector3 GetCollisionNormal(Bounds a, Bounds b, Vector3 velocity)
