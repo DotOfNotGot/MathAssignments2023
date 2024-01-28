@@ -26,13 +26,13 @@ public class NoiseGenerator : MonoBehaviour
         uint a = (uint)ix;
         uint b = (uint)iy;
         a *= 3284157443;
-
+        return Vector2.zero;
     }
     
     
     private float DotGridGradient(int ix, int iy, float x, float y)
     {
-        Vector2 gradient = random
+        return float.MaxValue;
     }
     
     float SamplePerlinNoise(float x, float y)
@@ -41,9 +41,9 @@ public class NoiseGenerator : MonoBehaviour
         int y0 = (int)y;
         int x1 = x0 + 1;
         int y1 = y0 + 1;
-        
-        
-        
+
+
+        return float.MaxValue;
     }
     
 
@@ -58,7 +58,8 @@ public class NoiseGenerator : MonoBehaviour
                 noiseGrid[x, y] = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)) * noiseScale;
             }
         }
-        
+
+        return noiseGrid;
     }
     
 }
